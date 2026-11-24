@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Ringer mode</string>
+    <string name="normal">Ring</string>
+    <string name="vibrate">Vibrate</string>
+    <string name="silent">Silent</string>
+    <string-array name="xposed_scope"><item>com.android.systemui</item></string-array>
+</resources>

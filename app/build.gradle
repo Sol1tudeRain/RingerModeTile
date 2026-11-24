@@ -1,0 +1,33 @@
+plugins { id 'com.android.application' }
+def keyFile = System.getenv('RINGER_SIGNING_KEYSTORE')
+def keyPassword = System.getenv('RINGER_SIGNING_PASSWORD')
+android {
+    namespace 'dev.local.ringermodetile'
+    compileSdk 35
+    defaultConfig {
+        applicationId 'dev.local.ringermodetile'
+        minSdk 31
+        targetSdk 35
+        versionCode 1
+        versionName '1.0'
+    }
+    signingConfigs {
+        if (keyFile && keyPassword) {
+            stable {
+                storeFile file(keyFile)
+                storePassword keyPassword
+                keyAlias 'ringermodetile'
+                keyPassword keyPassword
+                storeType 'pkcs12'
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            if (keyFile && keyPassword) signingConfig signingConfigs.stable
+        }
+    }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+}
+dependencies { compileOnly 'de.robv.android.xposed:api:82' }
